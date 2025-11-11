@@ -10,7 +10,7 @@
         @csrf
         <div class="mb-2 ">
             <label for="form-label">Image</label>
-            <input type="file" name="image" accept=".jpg,.png,.jpeg" id="">
+            <input type="file" name="image" class="form-control" accept=".jpg,.png,.jpeg" id="">
         </div>
         <div class="mb-2 ">
             <label for="form-label">Subtitle</label>
@@ -22,7 +22,7 @@
         </div>
         <div class="mb-2 ">
             <label for="form-label">Description</label>
-            <textarea name="description" id="" cols="30" rows="5"></textarea>
+            <textarea name="description" id="" class="form-control"  cols="30" rows="5"></textarea>
         </div>
         <button type="submit" class="btn btn-info">Submit</button>
         <a href="{{ url('homeadmin') }}" class="btn btn-secondary">Back</a>

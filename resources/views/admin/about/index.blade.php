@@ -3,7 +3,7 @@
 @section('content')
     <div class="table-responsive">
         <div class="d-flex justify-content-end">
-            <a href="{{ route('homeadmin.create') }}" class="btn btn-info my-2">ADD</a>
+            <a href="{{ route('aboutadmin.create') }}" class="btn btn-info my-2">ADD</a>
         </div>
     </div>
     <table class="table table-bordered text-center">
@@ -17,16 +17,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($homes as $index => $v)
+            @foreach ($abouts as $index => $x)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td><img src="{{ asset('storage/' . $v->image) }}" width="120" alt=""></td>
-                    <td>{{ $v->subtitle }}</td>
-                    <td>{{ $v->title }}</td>
-                    <td>{{ $v->description }}</td>
+                    <td><img src="{{ asset('storage/' . $x->image) }}" width="120" alt=""></td>
+                    <td>{{ $x->features }}</td>
+                    <td>{{ $x->title }}</td>
+                    <td>{{ $x->description }}</td>
                     <td>
-                        <a href="{{ route('homeadmin.edit', $v->id) }}" class="btn btn-success">Edit</a>
-                        <form action="{{ route('homeadmin.destroy', $v->id) }}" method="post" class="d-inline">
+                        <a href="{{ route('aboutadmin.edit', $x->id) }}" class="btn btn-success">Edit</a>
+                        <form action="{{ route('aboutadmin.destroy', $x->id) }}" method="post" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

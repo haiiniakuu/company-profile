@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Home;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $homes = Home::orderBy('id', 'DESC');
+        $homes = Home::orderBy('id', 'DESC')->get();
         return view('admin.home.index', compact('homes'));
     }
 
@@ -66,7 +67,8 @@ class HomeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $home = Home::find($id);
+        return view('admin.home.edit', compact('home'));
     }
 
     /**
@@ -74,7 +76,34 @@ class HomeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $home = Home::findOrFail($id);
+
+            $validasi = $request->validate([
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:200048',
+                'subtitle' => 'required|string',
+                'title' => 'required|string',
+                'description' => 'required|string',
+            ]);
+
+            // Kalau user upload gambar baru
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('upload/home', $filename, 'public');
+                $validasi['image'] = $path;
+            } else {
+                // Jika tidak upload gambar, pakai gambar lama
+                $validasi['image'] = $home->image;
+            }
+
+            $home->update($validasi);
+
+            return redirect()->route('homeadmin.index')->with('success', 'Data berhasil diperbarui!');
+        } catch (\Throwable $th) {
+            return back()->withErrors(['error' => 'terjadi masalah' . $th->getMessage()]);
+        }
+        
     }
 
     /**
@@ -82,6 +111,9 @@ class HomeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $home = Home::find($id); 
+        $home->delete(); 
+        File::delete(public_path('storage/' . $home->image)); 
+        return redirect()->route('homeadmin.index');
     }
 }
