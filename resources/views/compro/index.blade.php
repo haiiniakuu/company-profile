@@ -59,7 +59,7 @@
                                     <h5 class="text-primary text-uppercase mb-3 animated slideInDown">{{ $v->subtitle }}</h5>
                                     <h1 class="display-3 text-white animated slideInDown">{{ Str::title($v->title) }}</h1>
                                     <p class="fs-5 text-white mb-4 pb-2">{{ Str::words(ucfirst($v->desription), 15, '...') }}</p>
-                                    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                                    <a href="{{ route('homeadmin.index') }}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
                                     <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
                                 </div>
                             </div>

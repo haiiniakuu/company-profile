@@ -1,20 +1,27 @@
 @extends('admin.app')
-@section('title', 'About Edit')
+@section('title', 'Instruction Edit')
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <h1>{{ $error }}</h1>
         @endforeach
     @endif
-    <form action="{{ route('aboutadmin.update', $about->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('aboutadmin.update', $instructor->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')                                        
+
+        {{-- Name --}}
+        <div class="mb-3">
+            <label class="form-label fw-bold">Name</label>
+            <input type="text" name="name" class="form-control" 
+                   value="{{ old('name', $instructor->name) }}">
+        </div>
 
         {{-- Gambar lama --}}
         <div class="mb-3">
             <label class="form-label fw-bold">Current Image</label><br>
-            @if ($about->image)
-                <img src="{{ asset('storage/' . $about->image) }}" alt="Old Image" width="120" class="mb-2">
+            @if ($instructor->photo)
+                <img src="{{ asset('storage/' . $instructor->photo  ) }}" alt="Old Image" width="120" class="mb-2">
             @else
                 <p>No image uploaded</p>
             @endif
@@ -27,31 +34,26 @@
             <small class="text-muted">Kosongkan jika tidak ingin mengganti gambar.</small>
         </div>
 
-        {{-- Title --}}
+        {{-- Major --}}
         <div class="mb-3">
-            <label class="form-label fw-bold">Title</label>
-            <input type="text" name="title" class="form-control" 
-                   value="{{ old('title', $about->title) }}">
+            <label class="form-label fw-bold">Major</label>
+            <input type="text" name="major" class="form-control" 
+                   value="{{ old('major', $instructor->major) }}">
         </div>
 
-        {{-- Features --}}
+        {{-- sosmed --}}
         <div class="mb-2 ">
-            <label for="form-label">Features</label>
+            <label for="form-label">Sosmed</label>
             <div id="featurewrap">
                 <div class="feature-item d-flex">
-                    <input type="text" class="form-control" name="features" placeholder="Isi Feature" data-role="tagsinput"  value="{{ implode(',', $about->features) }}">
+                    <input type="text" class="form-control" name="sosmed" placeholder="Isi Feature" data-role="tagsinput"  value="{{ implode(',', $instructor->sosmed) }}">
                 </div>
             </div>
         </div>
 
-        {{-- Description --}}
-        <div class="mb-3">
-            <label class="form-label fw-bold">Description</label>
-            <textarea name="description" class="form-control" rows="5">{{ old('description', $about->description) }}</textarea>
-        </div>
 
         <button type="submit" class="btn btn-info">Update</button>
-        <a href="{{ route('aboutadmin.index') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ route('instructoradmin.index') }}" class="btn btn-secondary">Back</a>
     </form>
 @endsection
 

@@ -1,9 +1,12 @@
 <?php
 
 use App\Models\Home;
+use App\Models\About;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\InstructorController;
+use App\Models\Instructor;
 
 // Buat login
 Route::get('login', function () {
@@ -26,6 +29,7 @@ Route::delete('homeadmin/destroy/{id}', [HomeController::class, 'destroy'])->nam
 
 
 Route::resource('aboutadmin', AboutController::class);
+Route::resource('instructoradmin', InstructorController::class);
 
 
 
@@ -36,7 +40,9 @@ Route::get('/', function () {
 })->name('home.index');
 
 Route::get('about', function () {
-    return view('compro.about');
+    $instructor = Instructor::all();
+    $about = About::first();
+    return view('compro.about', compact('about','instructor'));
 })->name('about.index');
 
 Route::get('courses', function () {

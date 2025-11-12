@@ -77,25 +77,25 @@
 
             <!-- Layouts -->
             <li class="menu-item">
-              <a href="{{ route('homeadmin.index') }}" class="menu-link menu-toggle">
+              <a href="" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Layouts</div>
               </a>
 
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="{{ route('aboutadmin.index') }}" class="menu-link">
+                  <a href="{{ route('homeadmin.index') }}" class="menu-link">
                     <div data-i18n="Without menu">Home Menu</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-without-navbar.html" class="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
+                  <a href="{{ route('aboutadmin.index') }}" class="menu-link">
+                    <div data-i18n="Without navbar">About Menu</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <div data-i18n="Container">Container</div>
+                  <a href="{{ route('instructoradmin.index') }}" class="menu-link">
+                    <div data-i18n="Container">Instructor Menu</div>
                   </a>
                 </li>
                 <li class="menu-item">

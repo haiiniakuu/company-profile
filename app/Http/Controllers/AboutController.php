@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AboutController extends Controller
 {
@@ -29,7 +30,33 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $validasi = $request->validate([
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:20048',
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'features' => 'required|string',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('upload/about', $filename, 'public');
+                $validasi['image'] = $path;
+            }
+
+            $feautures = [];
+            if($request->features){
+                $feautures = array_map('trim', explode(',', $request->features));
+            }
+            $validasi['features'] = $feautures;
+
+            About::create($validasi);
+            return redirect()->route('aboutadmin.index');
+        } catch (\Throwable $th) {
+            return back()->withErrors(['error' => 'Terjadi kesalahan  di- ',
+            $th->getMessage()]);
+        }
     }
 
     /**
@@ -45,7 +72,8 @@ class AboutController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $about = About::find($id);
+        return view('admin.about.edit', compact('about'));
     }
 
     /**
@@ -53,7 +81,35 @@ class AboutController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $about = About::find($id);
+
+            $validasi = $request->validate([
+                'image' => 'image|mimes:png,jpg,jpeg|max:20048',
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'features' => 'required|string',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('upload/about', $filename, 'public');
+                $validasi['image'] = $path;
+            }
+
+            $features = [];
+            if ($request->features) {
+                $features = array_map('trim', explode(',', $request->features));
+            }
+            $validasi['features'] = $features;
+
+            $about->update($validasi);
+
+            return redirect()->route('aboutadmin.index');
+        } catch (\Throwable $th) {
+            return back()->withErrors(['error' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -61,6 +117,9 @@ class AboutController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $about = About::find($id);
+        $about->delete();
+        File::delete(public_path('storage/' . $about->image));
+        return redirect()->route('aboutadmin.index');
     }
 }

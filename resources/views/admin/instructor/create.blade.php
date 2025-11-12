@@ -1,36 +1,36 @@
 @extends('admin.app')
-@section('title', 'About Create')
+@section('title', 'Instructor Create')
 @section('content')
     @if ($errors->any())
         @foreach ($errors->all() as $error)
             <h1>{{ $error }}</h1>
         @endforeach
     @endif
-    <form action="{{ route('aboutadmin.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('instructoradmin.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-2 ">
-            <label for="form-label">Image</label>
-            <input type="file" name="image" class="form-control" accept=".jpg,.png,.jpeg" id="">
+            <label for="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="">
         </div>
         <div class="mb-2 ">
-            <label for="form-label">Features</label>
+            <label for="form-label">Photo</label>
+            <input type="file" name="photo" class="form-control" accept=".jpg,.png,.jpeg" id="">
+        </div>
+        <div class="mb-2 ">
+            <label for="form-label">Major</label>
+            <input type="text" name="major" class="form-control" id="">
+        </div>
+        <div class="mb-2 ">
+            <label for="form-label">Sosmed</label>
             <div id="featurewrap">
                 <div class="feature-item d-flex">
-                    <input type="text" class="form-control" name="features" placeholder="Isi Feature" data-role="tagsinput">
+                    <input type="text" class="form-control" name="sosmed" placeholder="Isi Sosmed" data-role="tagsinput">
                 </div>
             </div>
-            
         </div>
-        <div class="mb-2 ">
-            <label for="form-label">Title</label>
-            <input type="text" name="title" class="form-control" id="">
-        </div>
-        <div class="mb-2 ">
-            <label for="form-label">Description</label>
-            <textarea name="description" id="" class="form-control"  cols="30" rows="5"></textarea>
-        </div>
+        
         <button type="submit" class="btn btn-info">Submit</button>
-        <a href="{{ url('aboutadmin') }}" class="btn btn-secondary">Back</a>
+        <a href="{{ url('instructoradmin') }}" class="btn btn-secondary">Back</a>
     </form>  
 @endsection
 

@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class About extends Model
+class Instructor extends Model
 {
     protected $fillable = [
-        'image',
-        'title',
-        'description',
-        'features',
+        'name',
+        'photo',
+        'major',
+        'sosmed',
     ];
 
     protected $casts = [
-        'features' => 'array'
+        'sosmed' => 'array',
     ];
 }
