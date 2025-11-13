@@ -100,7 +100,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="{{ asset('storage/' . $about->image)  }}" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-200 h-100 " src="{{ asset('storage/' . $about->image)  }}" alt="" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -133,7 +133,33 @@
             <div class="row g-4">
                 @foreach ($instructor as $ins)
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item bg-light">
+                        <div class="team-item bg-light">
+                            <div class="overflow-hidden">
+                                <img class="img-fluid" style="width: 100%; height: 300px; object-fit: cover; background-repeat: no-repeat;" src="{{ asset('storage/' . $ins->photo) }}"
+                                    alt="">
+                            </div>
+                            <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
+                                <div class="bg-light d-flex justify-content-center pt-2 px-1">
+                                    {{-- @php
+                                        $icons = is_array($ins->sosmed) ? $ins->sosmed json_decode($ins->sosmed)
+                                        $urls = is_array($ins->sosmed_urls) ? $ins->sosmed_urls json_decode($ins->sosmed_urls)
+                                    @endphp --}}
+                                    @foreach ($ins->sosmed ?? [] as $y => $sc)
+                                        <a class="btn btn-sm-square btn-primary mx-1" href="{{ $ins->sosmed_urls[$y] }}"><i
+                                                class="{{ $sc }}"></i></a>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="text-center p-4">
+                                <h5 class="mb-0">{{ $ins->name }}</h5>
+                                <small>{{ $ins->major }}</small>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{-- @foreach ($instructor as $ins)
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-item bg-light ">
                         <div class="overflow-hidden" style="width: 100%; height: 250px; overflow: hidden; position: relative;">
                             <img class="img-fluid" src="{{ asset('storage/' . $ins->photo) }}" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
                         </div>
@@ -150,7 +176,7 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endforeach --}}
             </div>
         </div>
     </div>

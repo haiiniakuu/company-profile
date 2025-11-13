@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <style></style>
 
     @include('compro.inc.css')
 </head>
@@ -51,14 +52,14 @@
 
             @foreach ($homes as $v)
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="{{ asset('storage/' . $v->image) }}"  alt="">
+                    <img class="img-fluid ilal" src="{{ asset('storage/' . $v->image) }}" alt="">
                     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                         <div class="container">
                             <div class="row justify-content-start">
                                 <div class="col-sm-10 col-lg-8">
                                     <h5 class="text-primary text-uppercase mb-3 animated slideInDown">{{ $v->subtitle }}</h5>
                                     <h1 class="display-3 text-white animated slideInDown">{{ Str::title($v->title) }}</h1>
-                                    <p class="fs-5 text-white mb-4 pb-2">{{ Str::words(ucfirst($v->desription), 15, '...') }}</p>
+                                    <p class="fs-5 text-white mb-4 pb-2">{{ Str::words(ucfirst($v->description)) }}</p>
                                     <a href="{{ route('homeadmin.index') }}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
                                     <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
                                 </div>

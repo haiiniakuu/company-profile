@@ -11,9 +11,11 @@ class Instructor extends Model
         'photo',
         'major',
         'sosmed',
+        'sosmed_urls',
     ];
 
     protected $casts = [
         'sosmed' => 'array',
+        'sosmed_urls' => 'array',
     ];
 }

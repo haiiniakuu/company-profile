@@ -13,6 +13,7 @@
                 <th>Image</th>
                 <th>Subtitle</th>
                 <th>Title</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>

@@ -85,7 +85,7 @@ class AboutController extends Controller
             $about = About::find($id);
 
             $validasi = $request->validate([
-                'image' => 'image|mimes:png,jpg,jpeg|max:20048',
+                'image' => 'nullable|image|mimes:png,jpg,jpeg|max:20048',
                 'title' => 'required|string',
                 'description' => 'required|string',
                 'features' => 'required|string',

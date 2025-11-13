@@ -16,17 +16,28 @@
             <label for="form-label">Photo</label>
             <input type="file" name="photo" class="form-control" accept=".jpg,.png,.jpeg" id="">
         </div>
+
         <div class="mb-2 ">
-            <label for="form-label">Major</label>
-            <input type="text" name="major" class="form-control" id="">
-        </div>
-        <div class="mb-2 ">
-            <label for="form-label">Sosmed</label>
+            <label for="form-label">Sosmed Icons</label>
             <div id="featurewrap">
                 <div class="feature-item d-flex">
                     <input type="text" class="form-control" name="sosmed" placeholder="Isi Sosmed" data-role="tagsinput">
                 </div>
             </div>
+        </div>
+
+        <div class="mb-2 ">
+            <label for="form-label">Sosmed Urls</label>
+            <div id="featurewrap">
+                <div class="feature-item d-flex">
+                    <input type="url" class="form-control" name="sosmed_urls" placeholder="Isi Sosmed" data-role="tagsinput">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-2 ">
+            <label for="form-label">Expert</label>
+            <input type="text" name="major" class="form-control" id="">
         </div>
         
         <button type="submit" class="btn btn-info">Submit</button>

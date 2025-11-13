@@ -12,8 +12,9 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Photo</th>
-                <th>Major</th>
-                <th>Sosmed</th>
+                <th>Sosmed Icon</th>
+                <th>Sosmed Urls</th>
+                <th>Expert</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,7 +24,6 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $y->name }}</td>
                     <td><img src="{{ asset('storage/' . $y->photo) }}" width="120" alt=""></td>
-                    <td>{{ $y->major }}</td>
                     <td>
                         <ul>
                             @foreach ($y->sosmed as $c)
@@ -31,6 +31,14 @@
                             @endforeach
                         </ul>
                     </td>
+                    <td>
+                        <ul>
+                            @foreach ($y->sosmed_urls ?? ['null'] as $z)
+                                <li>{{ $z }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td>{{ $y->major }}</td>
                     <td>
                         <a href="{{ route('instructoradmin.edit', $y->id) }}" class="btn btn-success">Edit</a>
                         <form action="{{ route('instructoradmin.destroy', $y->id) }}" method="post" class="d-inline">

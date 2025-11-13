@@ -19,3 +19,13 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('asset/css/style.css') }}" rel="stylesheet">
+
+    <style>
+        .ilal{
+            width: 100%;
+            height: 1300px;
+            object-fit: cover;
+            background-repeat: no-repeat;
+        }
+        
+    </style>

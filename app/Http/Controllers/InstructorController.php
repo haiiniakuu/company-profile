@@ -35,7 +35,8 @@ class InstructorController extends Controller
                 'name' => 'required|string',
                 'photo' => 'required|image|mimes:png,jpg,jpeg|max:20048',
                 'major' => 'required|string',
-                'sosmed' => 'required|string',
+                'sosmed' => 'string',
+                'sosmed_urls' => 'required|string',
             ]);
 
             if ($request->hasFile('photo')) {
@@ -51,7 +52,14 @@ class InstructorController extends Controller
             }
             $validasi['sosmed'] = $sosmed;
 
+            $sosmed_urls = [];
+            if ($request->sosmed_urls) {
+                $sosmed_urls = array_map('trim', explode(',', $request->sosmed_urls));
+            }
+            $validasi['sosmed_urls'] = $sosmed_urls;
+
             Instructor::create($validasi);
+
             return redirect()->route('instructoradmin.index');
         } catch (\Throwable $th) {
             return back()->withErrors([
@@ -88,9 +96,10 @@ class InstructorController extends Controller
 
             $validasi = $request->validate([
                 'name' => 'required|string',
-                'photo' => 'required|image|mimes:png,jpg,jpeg|max:20048',
+                'photo' => 'nullable|image|mimes:png,jpg,jpeg|max:20048',
                 'major' => 'required|string',
                 'sosmed' => 'required|string',
+                'sosmed_urls' => 'required|string',
             ]);
 
             if ($request->hasFile('photo')) {
@@ -106,6 +115,12 @@ class InstructorController extends Controller
             }
             $validasi['sosmed'] = $sosmed;
 
+            $sosmed_urls = [];
+            if ($request->sosmed_urls) {
+                $sosmed_urls = array_map('trim', explode(',', $request->sosmed_urls));
+            }
+            $validasi['sosmed_urls'] = $sosmed_urls;
+
             $instructor->update($validasi);
 
             return redirect()->route('instructoradmin.index');
@@ -114,7 +129,7 @@ class InstructorController extends Controller
         }
     }
 
-    /**
+    /** 
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
