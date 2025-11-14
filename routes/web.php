@@ -2,11 +2,14 @@
 
 use App\Models\Home;
 use App\Models\About;
+use App\Models\Contact;
+use App\Models\Instructor;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\InstructorController;
-use App\Models\Instructor;
 
 // Buat login
 Route::get('login', function () {
@@ -31,7 +34,15 @@ Route::delete('homeadmin/destroy/{id}', [HomeController::class, 'destroy'])->nam
 Route::resource('aboutadmin', AboutController::class);
 Route::resource('instructoradmin', InstructorController::class);
 
+Route::get('auth/google', [GoogleAuthController::class, 'redirect'])->name('google-auth');
+Route::get('auth/google/call-back', [GoogleAuthController::class, 'callbackGoogle']);
 
+Route::get('/logout', [GoogleAuthController::class, 'logout'])->name('logout');
+
+//contact start
+Route::post('contact/store',[ContactController::class, 'store'])->name('contact.store');
+Route::get('contactadmin',[ContactController::class, 'index'])->name('contactadmin.index');
+Route::post('contactadmin.reply/{id}',[ContactController::class, 'reply'])->name('contactadmin.reply');
 
 // Isi
 Route::get('/', function () {
